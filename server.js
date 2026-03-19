@@ -40,6 +40,26 @@ app.put('/players/:id', updateScore);
 app.post('/players/register', createPlayer);
 app.post('/players/login', login);
 
+
+app.post('/test-jwt', (req, res)=>{
+    const {generateToken, verifyToken} = require('./utils/jwt');
+
+    const testPlayerId = '64as12321134dvasdkjn0789';
+    const token = generateToken(testPlayerId);
+    console.log('Generated Token: ', token);
+
+    const decoded = verifyToken(token);
+
+    console.log('Decoded Payload: ', decoded);
+
+    res.json({
+        success: true,
+        token,
+        decoded,
+        matches: decoded ? decoded.id === testPlayerId : false
+    });
+});
+
 app.listen(PORT, ()=> {
     console.log(`Server is running on port ${PORT}`)
 });

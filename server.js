@@ -7,7 +7,6 @@ const {
     login,
     updateScore
 } = require('./controllers/playerController');
-const { create } = require('./models/Player');
 
 dotenv.config();
 
